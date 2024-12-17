@@ -5,7 +5,7 @@
    v-model="name" v-on:keyup.enter="addAluno()">
    <table border="1px">
     <thead>
-      <th>Mataterias</th>
+      <th>Materias</th>
       <th>Nomes</th>
       <th>Opções</th>
     </thead>
@@ -14,7 +14,7 @@
         <td>{{aluno.id}}</td>
         <td>{{aluno.name}}</td>
         <td>
-          <button class="btn" @click="remover()">Remover</button>
+          <button class="btn" @click="remover(aluno)">Remover</button>
         </td>
       </tr>
     </tbody>
@@ -43,6 +43,10 @@ export default {
       }
       this.alunos.push(aluno);
       this.name = "";
+    },
+    remover(aluno){
+      let indice = this.alunos.indexOf(aluno);
+      this.alunos.splice(indice, 1)
     }
   },
 }
