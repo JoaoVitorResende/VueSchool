@@ -27,6 +27,23 @@ body, html{
 }
 #app {
 }
+.btn_danger{
+  background-color: red;
+}
+.btn{
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid black;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border-bottom: 3px solid black;
+}
+.btn:hover{
+  text-shadow: 1px 1px 1px black;
+  margin-top: 3px;
+  border-bottom: 1px solid black;
+}
 table{
   margin: 0;
   padding: 0;
