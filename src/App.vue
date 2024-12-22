@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Alunos from './components/AlunosClass.vue'
+import Alunos from './components/Aluno/AlunosClass.vue'
 
 export default {
   name: 'App',
