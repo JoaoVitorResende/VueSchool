@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TitulosClass text = "Aluno"/>
+    <TitulosClass text="Aluno" />
     <div>
       <input type="text" placeholder="Nome do aluno" v-model="name" />
       <button class="btn btn_input" @click="addAluno()">Adicionar</button>
@@ -40,26 +40,34 @@ export default {
     return {
       titulo: "Aluno",
       name: "",
-      alunos: [
-      ],
+      alunos: [],
     };
   },
-  created()
-  {
-    this.$http
-    .get("http://localhost:3000/alunos")
-    .then(rest => rest.json())
-    .then(alunosApi => this.alunos = alunosApi)
+  created() {
+    this.getAlunos();
   },
   props: {},
   methods: {
     addAluno() {
       let aluno = {
-        id: this.alunos.length + 1,
         name: this.name,
+        lastName: "",
       };
+      this.postAluno(aluno);
       this.alunos.push(aluno);
       this.name = "";
+    },
+    postAluno(aluno) {
+      this.$http
+        .post("http://localhost:3000/alunos", aluno)
+        .then((rest) => rest.json());
+        this.getAlunos()
+    },
+    getAlunos() {
+      this.$http
+        .get("http://localhost:3000/alunos")
+        .then((rest) => rest.json())
+        .then((alunosApi) => (this.alunos = alunosApi));
     },
     remover(aluno) {
       let indice = this.alunos.indexOf(aluno);
