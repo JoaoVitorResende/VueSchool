@@ -54,14 +54,15 @@ export default {
         lastName: "",
       };
       this.postAluno(aluno);
-      this.alunos.push(aluno);
-      this.name = "";
     },
     postAluno(aluno) {
       this.$http
         .post("http://localhost:3000/alunos", aluno)
-        .then((rest) => rest.json());
-        this.getAlunos()
+        .then((rest) => rest.json())
+        .then(alunoRetornado => {
+          this.alunos.push(alunoRetornado);
+          this.name = "";
+        });
     },
     getAlunos() {
       this.$http
@@ -70,8 +71,10 @@ export default {
         .then((alunosApi) => (this.alunos = alunosApi));
     },
     remover(aluno) {
-      let indice = this.alunos.indexOf(aluno);
-      this.alunos.splice(indice, 1);
+      this.$http.delete(`http://localhost:3000/alunos/${aluno.id}`).then(() => {
+        let indice = this.alunos.indexOf(aluno);
+        this.alunos.splice(indice, 1);
+      });
     },
   },
 };
