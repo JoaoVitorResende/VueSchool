@@ -16,7 +16,7 @@
           <td>{{ aluno.id }}</td>
           <td>{{ aluno.name }} {{ aluno.lastName }}</td>
           <td>
-            <button class="btn btn_danger" @click="remover(aluno)">
+            <button class="btn btn_Danger" @click="remover(aluno)">
               Remover
             </button>
           </td>

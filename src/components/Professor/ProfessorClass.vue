@@ -10,7 +10,7 @@
       <tbody v-if="professores.length">
         <tr v-for="(professor, index) in professores" :key="index">
           <td>{{ professor.id }}</td>
-          <td>{{ professor.name }} {{ professor.lastName }}</td>
+          <router-link to ="/todosAlunos" tag="td" style="cursor: pointer;">{{ professor.name }} {{ professor.lastName }}</router-link>
           <td>3</td>
         </tr>
       </tbody>
