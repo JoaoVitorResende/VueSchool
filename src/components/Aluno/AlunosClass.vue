@@ -59,7 +59,7 @@ export default {
       this.$http
         .post("http://localhost:3000/alunos", aluno)
         .then((rest) => rest.json())
-        .then(alunoRetornado => {
+        .then((alunoRetornado) => {
           this.alunos.push(alunoRetornado);
           this.name = "";
         });
