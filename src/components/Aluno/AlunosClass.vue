@@ -39,12 +39,17 @@ export default {
   data() {
     return {
       titulo: "Aluno",
+      professorId: this.$route.params.prof_id,
       name: "",
       alunos: [],
     };
   },
   created() {
-    this.getAlunos();
+    if (this.professorId) {
+      this.getAlunosByPorfessorID(this.professorId);
+    } else {
+      this.getAlunos();
+    }
   },
   props: {},
   methods: {
@@ -67,6 +72,12 @@ export default {
     getAlunos() {
       this.$http
         .get("http://localhost:3000/alunos")
+        .then((rest) => rest.json())
+        .then((alunosApi) => (this.alunos = alunosApi));
+    },
+    getAlunosByPorfessorID(professorId) {
+      this.$http
+        .get("http://localhost:3000/alunos?professor.id=" + professorId)
         .then((rest) => rest.json())
         .then((alunosApi) => (this.alunos = alunosApi));
     },
