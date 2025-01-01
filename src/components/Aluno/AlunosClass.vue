@@ -45,14 +45,17 @@ export default {
     };
   },
   created() {
-    if (this.professorId) {
-      this.getAlunosByPorfessorID(this.professorId);
-    } else {
-      this.getAlunos();
-    }
+    this.checkUrlType();
   },
   props: {},
   methods: {
+    checkUrlType() {
+      if (this.professorId) {
+        this.getAlunosByPorfessorID(this.professorId);
+      } else {
+        this.getAlunos();
+      }
+    },
     addAluno() {
       let aluno = {
         name: this.name,
