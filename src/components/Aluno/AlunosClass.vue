@@ -1,7 +1,13 @@
 <template>
   <div>
-    <TitulosClass text="Aluno" />
-    <div>
+    <TitulosClass
+      :text="
+        professorId != undefined
+          ? 'Professor(a): ' + professor.name
+          : 'Todos Alunos'
+      "
+    />
+    <div v-if="professorId != undefined">
       <input type="text" placeholder="Nome do aluno" v-model="name" />
       <button class="btn btn_input" @click="addAluno()">Adicionar</button>
     </div>
@@ -42,6 +48,7 @@ export default {
       professorId: this.$route.params.prof_id,
       name: "",
       alunos: [],
+      professor: {}
     };
   },
   created() {
@@ -51,6 +58,7 @@ export default {
   methods: {
     checkUrlType() {
       if (this.professorId) {
+        this.getProfessores();
         this.getAlunosByPorfessorID(this.professorId);
       } else {
         this.getAlunos();
@@ -60,6 +68,10 @@ export default {
       let aluno = {
         name: this.name,
         lastName: "",
+        professor: {
+          id: this.professor.id,
+          name: this.professor.name
+        },
       };
       this.postAluno(aluno);
     },
@@ -83,6 +95,14 @@ export default {
         .get("http://localhost:3000/alunos?professor.id=" + professorId)
         .then((rest) => rest.json())
         .then((alunosApi) => (this.alunos = alunosApi));
+    },
+    getProfessores() {
+      this.$http
+        .get("http://localhost:3000/professores/" + this.professorId)
+        .then((rest) => rest.json())
+        .then((professoresApi) => {
+          this.professor = professoresApi;
+        });
     },
     remover(aluno) {
       this.$http.delete(`http://localhost:3000/alunos/${aluno.id}`).then(() => {
