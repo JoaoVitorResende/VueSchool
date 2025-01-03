@@ -20,7 +20,11 @@
       <tbody v-if="alunos.length">
         <tr v-for="(aluno, index) in alunos" :key="index">
           <td>{{ aluno.id }}</td>
-          <td>{{ aluno.name }} {{ aluno.lastName }}</td>
+          <router-link
+            :to="`/alunodetalhe/'${aluno.id}`"
+            tag="td"
+            style="cursor: pointer"
+            >{{ aluno.name }} {{ aluno.lastName }}</router-link>
           <td>
             <button class="btn btn_Danger" @click="remover(aluno)">
               Remover
@@ -48,7 +52,7 @@ export default {
       professorId: this.$route.params.prof_id,
       name: "",
       alunos: [],
-      professor: {}
+      professor: {},
     };
   },
   created() {
@@ -70,7 +74,7 @@ export default {
         lastName: "",
         professor: {
           id: this.professor.id,
-          name: this.professor.name
+          name: this.professor.name,
         },
       };
       this.postAluno(aluno);
