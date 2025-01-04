@@ -20,7 +20,7 @@ export default new Router({
             component: Professor
         },
         {
-            path: '/alunodetalhe/:aluno_id',
+            path: '/alunodetalhe/:id',
             nome: 'alunoDetalhe',
             component: AlunoDetalhe
         },
