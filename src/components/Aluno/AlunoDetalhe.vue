@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td class = "colPequeno">Nome:</td>
-          <td></td>
+          <td>{{id}}</td>
         </tr>
         <tr>
           <td class = "colPequeno">Sobrenome:</td>
@@ -41,7 +41,7 @@ export default {
     };
   },
   created() {
-    //this.getAlunosByID()
+    this.getAlunosByID()
   },
   methods: {
     getAlunosByID() {

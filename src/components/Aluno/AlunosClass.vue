@@ -21,7 +21,7 @@
         <tr v-for="(aluno, index) in alunos" :key="index">
           <td>{{ aluno.id }}</td>
           <router-link
-            :to="`/alunodetalhe/'${aluno.id}`"
+            :to="`/alunodetalhe/${aluno.id}`"
             tag="td"
             style="cursor: pointer"
             >{{ aluno.name }} {{ aluno.lastName }}</router-link>
