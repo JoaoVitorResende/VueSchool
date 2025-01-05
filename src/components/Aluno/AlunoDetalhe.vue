@@ -41,8 +41,7 @@
               <option
                 v-for="(prfessor, index) in professores"
                 :key="index"
-                v-bind:value="prfessor"
-              >
+                v-bind:value="prfessor">
                 {{ prfessor.name }}
               </option>
             </select>
@@ -93,4 +92,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+colPequeno{
+  width: 20%;
+  text-align: center;
+  background-color: rgb(125, 217, 245);
+  font-weight: bold;
+}
+input, select{
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  font-family: Montserrat;
+  border-radius: 5px;
+  border: 1px solid silver;
+  width: 95%;
+  background-color: rgb(245, 245, 245);
+}
+select{
+  height: 38px;
+  width: 100%;
+}
 </style>
