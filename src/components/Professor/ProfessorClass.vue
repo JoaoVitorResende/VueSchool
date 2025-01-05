@@ -67,7 +67,7 @@ export default {
         }
         this.professores[index] = professor;
       })
-    }
+    },
   },
 };
 </script>
