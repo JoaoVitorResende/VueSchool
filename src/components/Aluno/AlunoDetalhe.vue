@@ -1,9 +1,8 @@
 <template>
   <div>
-    <TitulosClass
-      :text="aluno?.name ? `Aluno: ${aluno.name}` : 'Carregando...'"
-    />
-    <button @click="editAluno()">Editar</button>
+    <TitulosClass :text="aluno?.name ? `Aluno: ${aluno.name}` : 'Carregando...'" :btn-voltar="false">
+      <button @click="editAluno()" class="btn btnEditar">Editar</button>
+    </titulosclass>
     <table>
       <tbody>
         <tr>
@@ -111,5 +110,9 @@ input, select{
 select{
   height: 38px;
   width: 100%;
+}
+.btnEditar{
+  float: right;
+  background-color: rgb(40, 206, 236);
 }
 </style>
