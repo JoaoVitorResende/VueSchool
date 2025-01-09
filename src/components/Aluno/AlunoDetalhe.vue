@@ -1,8 +1,11 @@
 <template>
   <div>
-    <TitulosClass :text="aluno?.name ? `Aluno: ${aluno.name}` : 'Carregando...'" :btn-voltar="false">
+    <TitulosClass
+      :text="aluno?.name ? `Aluno: ${aluno.name}` : 'Carregando...'"
+      :btn-voltar="false"
+    >
       <button @click="editAluno()" class="btn btnEditar">Editar</button>
-    </titulosclass>
+    </TitulosClass>
     <table>
       <tbody>
         <tr>
@@ -15,21 +18,22 @@
           <td class="colPequeno">Nome:</td>
           <td>
             <label>{{ aluno.name }}</label>
-            <input  v-if="this.isEditing == true" v-model="aluno.name" type="text" />
+            <input
+              v-if="this.isEditing == true"
+              v-model="aluno.name"
+              type="text"
+            />
           </td>
         </tr>
         <tr>
           <td class="colPequeno">Sobrenome:</td>
           <td>
             <label>{{ aluno.lastName }}</label>
-            <input v-if="this.isEditing == true" v-model="aluno.lastName" type="text" />
-          </td>
-        </tr>
-        <tr>
-          <td class="colPequeno">Data de nascimento:</td>
-          <td>
-            <label>{{ aluno.data }}</label>
-            <input v-if="this.isEditing == true" v-model="aluno.data" type="text" />
+            <input
+              v-if="this.isEditing == true"
+              v-model="aluno.lastName"
+              type="text"
+            />
           </td>
         </tr>
         <tr>
@@ -40,7 +44,8 @@
               <option
                 v-for="(prfessor, index) in professores"
                 :key="index"
-                v-bind:value="prfessor">
+                v-bind:value="prfessor"
+              >
                 {{ prfessor.name }}
               </option>
             </select>
@@ -48,6 +53,12 @@
         </tr>
       </tbody>
     </table>
+    <div style="margin-top: 10px">
+      <div v-if="isEditing">
+        <button class="btn btnSalvar" @click="saveEdit()">Salvar</button>
+        <button class="btn btnCancelar" @click="cancelEdit()">Cancelar</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,7 +73,7 @@ export default {
       professores: [],
       aluno: {},
       id: this.$route.params.id,
-      isEditing: false
+      isEditing: false,
     };
   },
   created() {
@@ -82,22 +93,41 @@ export default {
         .then((rest) => rest.json())
         .then((professoresApi) => (this.professores = professoresApi));
     },
-    editAluno()
-    {
-      this.isEditing = !this.isEditing
-    }
+
+    editAluno() {
+      this.isEditing = !this.isEditing;
+    },
+    cancelEdit() {
+      this.isEditing = false;
+    },
+    saveEdit() {
+      let alunoEdit = {
+        id: this.aluno.id,
+        name: this.aluno.name,
+        lastName: this.aluno.lastName,
+        professor: this.aluno.professor,
+      };
+      this.updateAluno(alunoEdit);
+    },
+    updateAluno(alunoEdit) {
+      console.log(alunoEdit);
+      this.$http
+        .put(`http://localhost:3000/alunos/${alunoEdit.id}`, alunoEdit);
+        this.cancelEdit();
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-colPequeno{
+colPequeno {
   width: 20%;
   text-align: center;
   background-color: rgb(125, 217, 245);
   font-weight: bold;
 }
-input, select{
+input,
+select {
   margin: 0;
   padding: 5px 10px;
   font-size: 0.9em;
@@ -107,12 +137,20 @@ input, select{
   width: 95%;
   background-color: rgb(245, 245, 245);
 }
-select{
+select {
   height: 38px;
   width: 100%;
 }
-.btnEditar{
+.btnEditar {
   float: right;
   background-color: rgb(40, 206, 236);
+}
+.btnCancelar {
+  float: right;
+  background-color: rgb(236, 40, 40);
+}
+.btnSalvar {
+  float: right;
+  background-color: rgb(15, 214, 65);
 }
 </style>

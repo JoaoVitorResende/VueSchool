@@ -3,7 +3,7 @@
     <TitulosClass text="Professores" />
     <table>
       <thead>
-        <th>código</th>
+        <th>Código</th>
         <th>Nomes</th>
         <th>Alunos</th>
       </thead>
@@ -73,4 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+td{
+  text-align: center;
+}
 </style>

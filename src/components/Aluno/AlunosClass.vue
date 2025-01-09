@@ -138,4 +138,7 @@ input {
   margin: 0px;
   border: 0px;
 }
+td{
+  text-align: center;
+}
 </style>
