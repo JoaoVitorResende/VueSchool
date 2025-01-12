@@ -70,18 +70,15 @@ export default {
     },
     addAluno() {
       let aluno = {
-        name: this.name,
-        lastName: "",
-        professor: {
-          id: this.professor.id,
-          name: this.professor.name,
-        },
+        Name: this.name,
+        LastName: "",
+        ProfessorId: this.professor.id
       };
       this.postAluno(aluno);
     },
     postAluno(aluno) {
       this.$http
-        .post("http://localhost:3000/alunos", aluno)
+        .post("http://localhost:5133/api/Alunos", aluno)
         .then((rest) => rest.json())
         .then((alunoRetornado) => {
           this.alunos.push(alunoRetornado);
@@ -90,26 +87,26 @@ export default {
     },
     getAlunos() {
       this.$http
-        .get("http://localhost:3000/alunos")
+        .get("http://localhost:5133/api/Alunos")
         .then((rest) => rest.json())
         .then((alunosApi) => (this.alunos = alunosApi));
     },
     getAlunosByPorfessorID(professorId) {
       this.$http
-        .get("http://localhost:3000/alunos?professor.id=" + professorId)
+        .get(`http://localhost:5133/api/Alunos/ByProfessor/${professorId}`)
         .then((rest) => rest.json())
         .then((alunosApi) => (this.alunos = alunosApi));
     },
     getProfessores() {
       this.$http
-        .get("http://localhost:3000/professores/" + this.professorId)
+        .get("http://localhost:5133/api/Professor/" + this.professorId)
         .then((rest) => rest.json())
         .then((professoresApi) => {
           this.professor = professoresApi;
         });
     },
     remover(aluno) {
-      this.$http.delete(`http://localhost:3000/alunos/${aluno.id}`).then(() => {
+      this.$http.delete(`http://localhost:5133/api/Alunos/${aluno.id}`).then(() => {
         let indice = this.alunos.indexOf(aluno);
         this.alunos.splice(indice, 1);
       });

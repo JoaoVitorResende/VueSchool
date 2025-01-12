@@ -83,13 +83,13 @@ export default {
   methods: {
     getAlunosByID() {
       this.$http
-        .get("http://localhost:3000/alunos/" + this.id)
+        .get(`http://localhost:5133/api/Alunos/${this.id}`)
         .then((rest) => rest.json())
         .then((alunosApi) => (this.aluno = alunosApi));
     },
     getProfessores() {
       this.$http
-        .get("http://localhost:3000/professores")
+        .get("http://localhost:5133/api/Professor")
         .then((rest) => rest.json())
         .then((professoresApi) => (this.professores = professoresApi));
     },
@@ -112,7 +112,7 @@ export default {
     updateAluno(alunoEdit) {
       console.log(alunoEdit);
       this.$http
-        .put(`http://localhost:3000/alunos/${alunoEdit.id}`, alunoEdit);
+        .put(`http://localhost:5133/api/Alunos/${alunoEdit.id}`, alunoEdit);
         this.cancelEdit();
     },
   },

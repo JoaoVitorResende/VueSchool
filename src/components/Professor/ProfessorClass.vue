@@ -41,7 +41,7 @@ export default {
   methods: {
     getAlunos() {
       this.$http
-        .get("http://localhost:3000/alunos")
+        .get("http://localhost:5133/api/Alunos")
         .then((rest) => rest.json())
         .then((alunosApi) => {
           this.alunos = alunosApi;
@@ -50,7 +50,7 @@ export default {
     },
     getProfessores() {
       this.$http
-        .get("http://localhost:3000/professores")
+        .get("http://localhost:5133/api/Professor")
         .then((rest) => rest.json())
         .then((professoresApi) => {
           this.professores = professoresApi;
